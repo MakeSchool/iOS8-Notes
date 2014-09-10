@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		62DD9D0F19C106A600AC46FA /* NotesListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 62DD9D0E19C106A600AC46FA /* NotesListTableViewController.m */; };
 		62FDBBE219C0CEB20088719B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 62FDBBE119C0CEB20088719B /* main.m */; };
 		62FDBBE519C0CEB20088719B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 62FDBBE419C0CEB20088719B /* AppDelegate.m */; };
 		62FDBBEB19C0CEB20088719B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62FDBBE919C0CEB20088719B /* Main.storyboard */; };
@@ -26,6 +27,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		62DD9D0D19C106A600AC46FA /* NotesListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotesListTableViewController.h; sourceTree = "<group>"; };
+		62DD9D0E19C106A600AC46FA /* NotesListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotesListTableViewController.m; sourceTree = "<group>"; };
 		62FDBBDC19C0CEB20088719B /* Notes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Notes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		62FDBBE019C0CEB20088719B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		62FDBBE119C0CEB20088719B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -81,6 +84,8 @@
 				62FDBBE319C0CEB20088719B /* AppDelegate.h */,
 				62FDBBE419C0CEB20088719B /* AppDelegate.m */,
 				62FDBBE919C0CEB20088719B /* Main.storyboard */,
+				62DD9D0D19C106A600AC46FA /* NotesListTableViewController.h */,
+				62DD9D0E19C106A600AC46FA /* NotesListTableViewController.m */,
 				62FDBBEC19C0CEB20088719B /* Images.xcassets */,
 				62FDBBEE19C0CEB20088719B /* LaunchScreen.xib */,
 				62FDBBDF19C0CEB20088719B /* Supporting Files */,
@@ -216,6 +221,7 @@
 			files = (
 				62FDBBE519C0CEB20088719B /* AppDelegate.m in Sources */,
 				62FDBBE219C0CEB20088719B /* main.m in Sources */,
+				62DD9D0F19C106A600AC46FA /* NotesListTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -406,6 +412,7 @@
 				62FDBC0119C0CEB20088719B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		62FDBC0219C0CEB20088719B /* Build configuration list for PBXNativeTarget "NotesTests" */ = {
 			isa = XCConfigurationList;
@@ -414,6 +421,7 @@
 				62FDBC0419C0CEB20088719B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
