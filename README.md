@@ -320,8 +320,32 @@ You will maybe realize that changes to the notes that you make in the detail vie
 
 ##Storing changes to a note
 
+For the purpose of our small app storing changes to notes can be implemented very simple. Whenever the detail view controller disappears (which happens when a user hits the back button) we update the note with the current content displayed in our views. Can you guess how the method we are about to implement is called? Right - `viewWillDisappear:`:
 
-	
+	- (void)viewWillDisappear:(BOOL)animated {
+	    [super viewWillDisappear:animated];
+	    
+	    self.note.title = self.titleTextField.text;
+	    self.note.content = self.contentTextView.text;
+	}
+
+Now you will see that changes are persisted correctly. When switching back and forth between our two view controllers all changes we make in the detail view controller get displayed correctly. However, the list of notes always shows the old titles of our notes.
+
+##Reloading a Table View
+
+The `UITableView` does not automatically refresh its content. In order to refresh the list we need to call `reloadData` on the table view (the `UITableViewController` calls `reloadData` once automatically when the table view is empty, that's why we only need to call it to refresh the table view content, not for the initial load).
+
+Once again a good place to trigger view updates is in the `viewWillAppear:` method. Add this method to *NotesListTableViewController.m*:
+
+	- (void)viewWillAppear:(BOOL)animated {
+	    [super viewWillAppear:animated];
+	    
+	    [self.tableView reloadData];
+	}
+
+Now we ask the table view to refresh its content every time it is displayed. This will trigger the table view to call the `tableView:numberOfRowsInSection` and `tableView:cellForRowAtIndexPath` methods on its data source, which is `NotesListTableViewController`. Here we will create cells that reflect the updated notes.
+
+Time to run the app once again. You should see notes updating and persisting in both view controllers correctly now.
 
 #Adding User Created Notes
 

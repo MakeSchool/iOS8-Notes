@@ -25,4 +25,11 @@
     self.contentTextView.text = self.note.content;
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    self.note.title = self.titleTextField.text;
+    self.note.content = self.contentTextView.text;
+}
+
 @end
