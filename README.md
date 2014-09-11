@@ -255,3 +255,74 @@ It's time to run the app again:
 ![image](instructionImages/realnotes.png)
 
 You can now see a list that is generated based on real data stored in our application.
+
+##Passing Notes around
+
+Now that our list can display real `Note` objects we should add that capability to our detail view. This includes to steps:
+
+- Pass a Note that we have selected from the list to the Detail View Controller
+- Enable the Detail View Controller to display the Note using the title text field and the content text view
+
+Let's first create a custom class for our Detail View Controller, so that we can add a `note` property that can be set by the list view controller. Create a new class called `NoteDetailViewController` and make it a subclass of `UIViewController`. That class shall be able to store a `Note`, this is what the *.h* file should look like:
+
+	#import <UIKit/UIKit.h>
+	
+	@class Note;
+	
+	@interface NoteDetailViewController : UIViewController
+	
+	@property (nonatomic, strong) Note *note;
+	
+	@end
+	
+Now that we have created this class, we need to set it up as a custom class for the detail view controller in our storyboard. Based on the previous example of setting up a custom class you should be able to solve this on your own!
+	
+Now how can we hand the note to this detail view controller? Luckily UIKit provides a convenient method called `prepareForSegue:sender:` that is called before a segue occurs. Here developers can access the `destinationViewController`, which is the view controller to which the segue is transitioning. 
+
+We can implement that method in the `NotesListTableViewController` so that we can get access to the `NoteDetailViewController` we are transitioning to.
+
+Add this implementation to *NoteDetailViewController.m*:
+
+	- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+	    NoteDetailViewController *noteDetailViewController = [segue destinationViewController];
+	    NSIndexPath *selectedIndexPath = self.tableView.indexPathForSelectedRow;
+	    noteDetailViewController.note = self.notes[selectedIndexPath.row];
+	} 
+
+In the first line we are accessing the destination view controller of this segue, which is the `NoteDetailViewController`. In the next line we ask the table view which index path is currently selected. That allows us to determine which note has been selected in the list. In the last step we pick that note from our notes array and hand it to the detail view controller.
+
+Now we are successfully handing the note to the detail view controller - but we don't get to see much yet. Let's display the note in the detail view controller.
+
+##Displaying a Note in the Detail View Controller
+
+We want to display the title of a note in the text field of the detail view controller and the content in the text view. To achieve that we need code connections to be able to change the content of our UI elements in code. Open the main storyboard and select the text field in the note detail view controller. Select the connections inspector in the right panel. This is the same tab that you used to trigger the segue from the table view cell to the detail view controller. Code connections that allow us to edit UI components from code are called *Referencing Outlets*. To create a code connection you need to switch to the *Assistant Editor* in the top right corner (red circle), that will allow you to display a interface file and code directly next to each other. Then you can drag the dot behind *New Referencing Outlet* into the *NoteDetailViewController.m* file. Note that you need to drop the line within the `@interface` block, because that is the only place where properties can be declared:
+
+![image](instructionImages/IBOutlet1.png)
+
+When you end dragging the line a property will be created and you will be prompted for a name. Choose `titleTextField`:
+
+![image](instructionImages/namingOutlet.png)
+
+Repeat the same for the text view and name the property `contentTextView`.
+Now we have two referencing outlets we can work with. Now we need an adequate place in code where we can display the currently selected note. A good method is `viewWillAppear:` which is called immediately before the view of a view controller is displayed. Add this implementation to *NoteDetailViewController.m*:
+
+	- (void)viewWillAppear:(BOOL)animated {
+	    [super viewWillAppear:animated];
+	    
+	    self.titleTextField.text = self.note.title;
+	    self.contentTextView.text = self.note.content;
+	}
+
+Additionally you need to import the `Note` class!
+Now you can test the app and you will see that selected notes are passed to the detail view controller and displayed there.
+
+You will maybe realize that changes to the notes that you make in the detail view aren't saved. When you switch back to the list view controller all changes to notes disappear. Luckily that is easily fixed.
+
+##Storing changes to a note
+
+
+	
+
+#Adding User Created Notes
+
+##Editing Notes

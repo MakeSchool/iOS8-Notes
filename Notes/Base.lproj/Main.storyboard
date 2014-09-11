@@ -35,10 +35,10 @@
             </objects>
             <point key="canvasLocation" x="520" y="326"/>
         </scene>
-        <!--View Controller-->
+        <!--Note Detail View Controller-->
         <scene sceneID="jyy-d3-5zy">
             <objects>
-                <viewController id="0gn-G8-c3P" sceneMemberID="viewController">
+                <viewController id="0gn-G8-c3P" customClass="NoteDetailViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="EKK-vK-RwW"/>
                         <viewControllerLayoutGuide type="bottom" id="nqG-ua-hqA"/>
@@ -71,10 +71,14 @@
                             <constraint firstItem="ICw-2g-KLH" firstAttribute="top" secondItem="OPh-Zh-BPz" secondAttribute="bottom" constant="8" id="zxa-LB-UiX"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="contentTextView" destination="ICw-2g-KLH" id="Bz9-0H-oRd"/>
+                        <outlet property="titleTextField" destination="OPh-Zh-BPz" id="q61-AC-O3M"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="t32-iM-FhS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1223" y="326"/>
+            <point key="canvasLocation" x="1191" y="326"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="baO-gP-BWd">

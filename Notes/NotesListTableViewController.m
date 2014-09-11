@@ -8,6 +8,7 @@
 
 #import "NotesListTableViewController.h"
 #import "Note.h"
+#import "NoteDetailViewController.h"
 
 @interface NotesListTableViewController ()
 
@@ -104,14 +105,14 @@
 }
 */
 
-/*
+
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    NoteDetailViewController *noteDetailViewController = [segue destinationViewController];
+    NSIndexPath *selectedIndexPath = self.tableView.indexPathForSelectedRow;
+    noteDetailViewController.note = self.notes[selectedIndexPath.row];
 }
-*/
+
 
 @end
