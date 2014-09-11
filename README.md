@@ -190,3 +190,68 @@ You can also test the layout in landscape mode and you will see that it looks go
 ![image](instructionImages/ConstraintsDone.png)
 
 That is the power of Auto Layout.
+
+#Add Notes
+
+Now it's time to add some notes. Currently we are only displaying dummy data, that shall change in this step.
+
+Start of by creating a `Note` class. It should be a subclass of `NSObject` and have to properties: `title` and `content`.
+
+Once you have done that, let's create some notes in code and display them. Inside of `NotesListTableViewController` add the declaration for an array that will hold our notes:
+
+	@interface NotesListTableViewController ()
+	
+	@property (nonatomic, strong) NSMutableArray *notes;
+	
+	@end
+	
+Then implement `initWithCoder`, which is the designated initializer for view controllers that are created from storyboard files, and create notes and add them to the notes array:
+
+	- (id)initWithCoder:(NSCoder *)aDecoder {
+	    self = [super initWithCoder:aDecoder];
+	    
+	    if (self) {
+	        Note *note1 = [Note new];
+	        note1.title = @"Note 1";
+	        note1.content = @"Note 1 Content";
+	        
+	        Note *note2 = [Note new];
+	        note2.title = @"Note 2";
+	        note2.content = @"Note 2 Content";
+	        
+	        Note *note3 = [Note new];
+	        note3.title = @"Note 3";
+	        note3.content = @"Note 3 Content";
+	        
+	        self.notes = [@[note1, note2, note3] mutableCopy];
+	    }
+	    
+	    return self;
+	}
+	
+Now we have some real notes in our application! We can now change the implementation of our table view data source to use these notes instead of placeholder values. First change the implementation of `tableView:numberOfRowsInSection`:
+
+	- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+	    // Return the number of rows in the section.
+	    return [self.notes count];
+	}
+	
+Instead of returning a constant value of 10, we are now returning the actual amount of notes in our application.
+
+Now let's change the cell display code:
+
+	- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+	    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"NotesCell" forIndexPath:indexPath];
+	    
+	    cell.textLabel.text = [self.notes[indexPath.row] title];
+	    
+	    return cell;
+	}
+	
+Instead of displaying a placeholder text we are now choosing one of our notes (based on which row the table view wants to display, which is passed in in the indexPath parameter) and display the title of that note.
+
+It's time to run the app again:
+
+![image](instructionImages/realnotes.png)
+
+You can now see a list that is generated based on real data stored in our application.

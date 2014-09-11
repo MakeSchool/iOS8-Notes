@@ -7,12 +7,37 @@
 //
 
 #import "NotesListTableViewController.h"
+#import "Note.h"
 
 @interface NotesListTableViewController ()
+
+@property (nonatomic, strong) NSMutableArray *notes;
 
 @end
 
 @implementation NotesListTableViewController
+
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    
+    if (self) {
+        Note *note1 = [Note new];
+        note1.title = @"Note 1";
+        note1.content = @"Note 1 Content";
+        
+        Note *note2 = [Note new];
+        note2.title = @"Note 2";
+        note2.content = @"Note 2 Content";
+        
+        Note *note3 = [Note new];
+        note3.title = @"Note 3";
+        note3.content = @"Note 3 Content";
+        
+        self.notes = [@[note1, note2, note3] mutableCopy];
+    }
+    
+    return self;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -33,14 +58,14 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return 10;
+    return [self.notes count];
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"NotesCell" forIndexPath:indexPath];
     
-    cell.textLabel.text = @"Note";
+    cell.textLabel.text = [self.notes[indexPath.row] title];
     
     return cell;
 }
