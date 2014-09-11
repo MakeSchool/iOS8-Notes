@@ -117,4 +117,50 @@ now the amount of rows - for now we return 10 as a placeholder, later we will re
 
 The second method `tableView:cellForRowAtIndexPath:` is a little bit more complicated. To save memory a `UITableView` only keeps references to cells that are currently visible. Imagine how a list with 20 000 entries would impact memory and performance if the `UITableView` would create every cell upfront and keep a reference to it - dynamically allocting cells as they are needed is a better approach. Additionally the table view is designed to reuse cells that are no longer visible and to use them to display new content that has become visible - once again for performance reasons. This way a table view can use as little as 20 cells to display thousands of entries in a list.
 
-As developers we need to implement the `tableView:cellForRowAtIndexPath:` method in a way that reuses existing table view cells instead of constantly creating new ones. This is what we accomplish with the first line, we tell the table view to dequeue a cell with a certain *identifier*. We need this identifier because a table view could contains cells of different types (some cells could display places, other music, etc.) and we can only reuse an existing cell if it has the same type as the entry the table view is about to add.
+As developers we need to implement the `tableView:cellForRowAtIndexPath:` method in a way that reuses existing table view cells instead of constantly creating new ones. This is what we accomplish with the first line, we tell the table view to dequeue a cell with a certain *identifier*. The table view will try to reuse an existing cell that is currently not displayed, if that is not possible if will create a new one. We need this identifier because a table view could contain cells of different types (some cells could display places, other music, etc.) and we can only reuse an existing cell if it has the same type as the entry the table view is about to add.
+
+Luckily our App has only one cell type since we only display notes. Our code is now set up to display ten entries in our list. Before we can test this we need to set up some code connections.
+
+##Code Connections
+
+We need two code connections in Interface Builder:
+
+- We need to set the *identifier* of our table view cell in our storyboard to the one that we have used in code
+- We need to set the custom class of the table view controller to `NotesListTableViewController`
+
+###Table View Cell Identifier
+
+For this step open *Main.storyboard*. Interface Builder allows us to design different table view cells directly within the table view. These cells are listed under the header "Prototype Cells". Per default a table view has one prototype cell - just enough for our app. Select that prototype cell and set the *identifier* to *NotesCell* in the attributes inspector:
+
+![image](instructionImages/CellIdentifier.png)
+
+Now that the identifier we have set in code matches the one we have set up in our storyboard, the table view will now which type of cell it needs to instantiate.
+
+##Setting up a Custom Class
+
+For the code in `NotesListTableViewController` to run, we need to set up a reference to it in our storyboard. We do that by setting up a custom class for our table view controller. Select the table view controller, then set the class in the identity inspector:
+
+![image](instructionImages/CodeConnection.png)
+
+Now our custom class will be instantiated instead of the default `UITableViewController`.
+
+Now it's time to test the App again. Run it and you should see a list with 10 Entries:
+
+![image](instructionImages/10Entries.png)
+
+#Connect the Detail View Controller
+
+Next, we want to connect the detail view controller with the list view controller, to complete our app navigation. Storyboard allows us to create these connections visually, they are called *segues*. We want to switch to the Detail View Controller when one of the cells in our list is tapped. Select the table view cell to set up a segue. Then select the rightmost tab in the right panel (Connections Inspector). In the *Triggered Segues* section you can see two different ways how a cell can trigger a transition to a different view controller, upon selection and upon accessory action. We want to transition upon selection, which allows the user to tap anywhere into the cell. We can create the segue by draggin the mouse from the dot behind the triggered segue to the target view controller:
+
+![image](instructionImages/Segue1.png)
+
+When we drop that connection we get to choose between different presentation types. We want to use *show* which is the default presentation type within a container view controller.
+
+##Set up the Detail View Controller
+
+Our detail view controller will need some content. For this app we'll keep it simple - one textfield for the title of the note and a text view (supports multiple lines of text input) for the body of the note. Add a textfield to the top of the view and the text view below:
+
+![image](instructionImages/DetailDesign.png)
+
+When you run this app you will see that the layout doesn't look that nice. Why? Starting with Xcode 6 we are strongly discouraged from defining User Interfaces with absolute positions, that is why interface builder is giving us a preview of our app in square dimensions. However the iPhone 6 is not square and the positions we have set up just don't work on an actual phone. What is the solution? Auto Layout!
+Instead of using absolute positions, Auto Layout let's us define a set of constraints for our views. These constraints allow iOS to calculate absolute positions for different device types. Auto Layout is a whole chapter of its own, so we encourage you to take a look at the [Apple Auto Layout Guide](https://developer.apple.com/library/ios/documentation/UserExperience/Conceptual/AutolayoutPG/Introduction/Introduction.html). For now we will primarily take a look at how we can create Layout Constraints by creating a simple layout for our detail view.
