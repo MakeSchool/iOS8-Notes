@@ -349,4 +349,44 @@ Time to run the app once again. You should see notes updating and persisting in 
 
 #Adding User Created Notes
 
-##Editing Notes
+One of the main changes we need to make to complete this app is letting the user to create and delete notes. At the moment we are creating three notes in code and the user can only edit these.
+
+First we need to add a button that allows the suer to create a new note. Let's add a *+* button to the list view controller. A common place for buttons within view controllers that are wrapped into a navigation controller is the navigation bar at the top of the screen. This is also where the back button is placed automatically.
+
+Buttons for that top bar are called Bar Button Items. Luckily UIKit already provides a *+* button style for us. Add a bar button item to the navigation bar and change the style to be a *+* button:
+ 
+![image](instructionImages/barbutton_item.png)
+
+iOS apps stand out because of great usability. For our app it would be nice if the *+* button would create a new note and then display the same view controller that is used to display/edit notes. This way the user will only have to be familiar with two different view controllers.
+
+Let's add a segue from the *+* button to the detail view controller:
+
+![image](instructionImages/addSegue.png)
+
+Choose this to be a *show* segue again. If you happen to test the *+* button now you will realize that a transition happens, but instead of creating a new note we are always displaying the first note in the list. Where could we implement creating a new note before we transition to the detail view controller? Right - in the `prepareForSegue:` method inside of `NotesListTableViewController`.
+
+Thinking about this you might realize that we now have two different segues that both transition from the list view controller to the detail view controller. In order to determine if we need to select an existing note for display or if we need to create a new note we need to know which of these two segues is currently going on. UIKit allows us to assign *identifiers* to segues, that allows us to implement different behavior for different segues.  Let's assign two different identifiers to our segues. We can do so by selecting a segue in our storyboard and selecting the attributes inspector:
+
+![image](instructionImages/nameSegue.png)
+
+Choose "AddNote" as the identifier for the segue from the *+* button and "ShowNote" for the segue from the table view cell.
+Now we can identify the two different segues. Let's change the implementation of our `prepareForSegue:` method accordingly:
+
+	- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+	    if ([segue.identifier isEqualToString:@"ShowNote"]) {
+	        NoteDetailViewController *noteDetailViewController = [segue destinationViewController];
+	        NSIndexPath *selectedIndexPath = self.tableView.indexPathForSelectedRow;
+	        noteDetailViewController.note = self.notes[selectedIndexPath.row];
+	    } else if ([segue.identifier isEqualToString:@"AddNote"]) {
+	        Note *note = [Note new];
+	        [self.notes addObject:note];
+	        NoteDetailViewController *noteDetailViewController = [segue destinationViewController];
+	        noteDetailViewController.note = note;
+	    }
+	}
+
+On a *Show Note* segue we are performing our old code, on a *Add Note* segue we are creating a new note, adding it to our array of notes and handing that new note to the detail view controller. Now a user is able to add custom notes to this app. If you feel like improving the app you could set up a default title and content for newly created notes.
+
+Now that a user can create notes we no longer need to create dummy ones. Replace the initialization of the notes array inside of the initializer with this line:
+
+	self.notes = [NSMutableArray array];

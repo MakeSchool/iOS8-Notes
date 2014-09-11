@@ -22,19 +22,7 @@
     self = [super initWithCoder:aDecoder];
     
     if (self) {
-        Note *note1 = [Note new];
-        note1.title = @"Note 1";
-        note1.content = @"Note 1 Content";
-        
-        Note *note2 = [Note new];
-        note2.title = @"Note 2";
-        note2.content = @"Note 2 Content";
-        
-        Note *note3 = [Note new];
-        note3.title = @"Note 3";
-        note3.content = @"Note 3 Content";
-        
-        self.notes = [@[note1, note2, note3] mutableCopy];
+        self.notes = [NSMutableArray array];
     }
     
     return self;
@@ -100,9 +88,16 @@
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    NoteDetailViewController *noteDetailViewController = [segue destinationViewController];
-    NSIndexPath *selectedIndexPath = self.tableView.indexPathForSelectedRow;
-    noteDetailViewController.note = self.notes[selectedIndexPath.row];
+    if ([segue.identifier isEqualToString:@"ShowNote"]) {
+        NoteDetailViewController *noteDetailViewController = [segue destinationViewController];
+        NSIndexPath *selectedIndexPath = self.tableView.indexPathForSelectedRow;
+        noteDetailViewController.note = self.notes[selectedIndexPath.row];
+    } else if ([segue.identifier isEqualToString:@"AddNote"]) {
+        Note *note = [Note new];
+        [self.notes addObject:note];
+        NoteDetailViewController *noteDetailViewController = [segue destinationViewController];
+        noteDetailViewController.note = note;
+    }
 }
 
 

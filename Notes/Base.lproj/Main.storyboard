@@ -20,7 +20,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="0gn-G8-c3P" kind="show" id="TjE-wK-Cmu"/>
+                                    <segue destination="0gn-G8-c3P" kind="show" identifier="ShowNote" id="TjE-wK-Cmu"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -29,7 +29,15 @@
                             <outlet property="delegate" destination="daT-zf-oxT" id="7oE-YZ-p7g"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="Rim-S3-Yg1"/>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="Rim-S3-Yg1">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="HNM-BE-1Pg">
+                            <connections>
+                                <segue destination="0gn-G8-c3P" kind="show" identifier="AddNote" id="f59-Sx-gD6"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fpB-mr-qtr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -96,7 +104,10 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kcu-Pk-aZW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-292" y="326"/>
+            <point key="canvasLocation" x="-159" y="326"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="f59-Sx-gD6"/>
+    </inferredMetricsTieBreakers>
 </document>
