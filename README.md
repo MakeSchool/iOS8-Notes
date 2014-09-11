@@ -8,7 +8,7 @@ Choose the name for your application and select *Objective-C* as language:
 
 ![image](instructionImages/AppDetails.png)
 
-After hitting *next* and choosing a project location Xcode will create the new project, based on a project template. You will see that the template contains, among additoinal files, an `AppDelegate` class, a `ViewController` class and a `Main.storyboard` file:
+After hitting *next* and choosing a project location Xcode will create the new project, based on a project template. You will see that the template contains, among additional files, an `AppDelegate` class, a `ViewController` class and a `Main.storyboard` file:
 
 ![image](instructionImages/AppTemplate.png)
 
@@ -18,10 +18,10 @@ We want to create an App that can display notes. The app will consist of two dif
 
 ##Setting up the Notes List View Controller
 
-Let's start by creating the first View Controller that displays a list of notes. Whenever we want to display items in a list on iOS we use a component called `UITableView`. Since that component is used very often Interface Builder provides a template View Controller called *Table View Contoller* that provides a basic table view and a ViewController that is associated with it. Before we create it let's remove the default View Controller that has been created as part of the template:
+Let's start by creating the first View Controller that displays a list of notes. Whenever we want to display items in a list on iOS we use a component called `UITableView`. Since that component is used very often Interface Builder provides a template View Controller called *Table View Controller* that provides a basic table view and a ViewController that is associated with it. Before we create it let's remove the default View Controller that has been created as part of the template:
 
 - Select the View Controller in the Storyboard by clicking into it and hit the delete key
-- Remove the `ViewController` class from Xcode (Selectn "Move to Trash" when prompt appears)
+- Remove the `ViewController` class from Xcode (Select "Move to Trash" when prompt appears)
 
 Now your Xcode project should look like this:
 
@@ -63,7 +63,7 @@ As you can see, Interface Builder creates a Navigation Controller and embeds the
 
 ![image](instructionImages/Navigation_TableView.png)
 
-Now you will see a navigation bar above the table view. This indicates that the table view is sucessfully embedded inside of a navigation controller.
+Now you will see a navigation bar above the table view. This indicates that the table view is successfully embedded inside of a navigation controller.
 
 #Add Content to the App
 
@@ -80,7 +80,7 @@ Name the new file `NotesListTableViewController` and make it a subclass of `UITa
 When Xcode creates the `NotesListTableViewController` it uses a template for `UITableViewController` subclasses that comes with a lot of comments and placeholder code.
 
 The `UITableView` is a very important component on the iOS platform, basically every scrollable list of items (e.g. messages, email) is implemented using `UITableView`. `UITableView` declares two protocols `UITableViewDataSource` and `UITableViewDelegate`. 
-The data source protocol is used by the table view to determine the content it needs to display, the delegate protocol is used to inform another class about cells that have been selected and to provide an interface for modifying the table view behaviour.
+The data source protocol is used by the table view to determine the content it needs to display, the delegate protocol is used to inform another class about cells that have been selected and to provide an interface for modifying the table view behavior.
 
 The `UITableViewController` creates a `UITableView` and sets itself as the delegate and the data source of the table view. If you were to create a `ViewController` that has a table view and **does not** inherit from `UITableViewController` you would have to set up the data source and the delegate of your table view yourself.
 
@@ -115,7 +115,7 @@ Now lets fill the table view with some placeholder content:
 The `tableView:numberOfRowsInSection:` implementation is quickly explained, the table view wants to 
 now the amount of rows - for now we return 10 as a placeholder, later we will return the amount of notes we have stored in the App.
 
-The second method `tableView:cellForRowAtIndexPath:` is a little bit more complicated. To save memory a `UITableView` only keeps references to cells that are currently visible. Imagine how a list with 20 000 entries would impact memory and performance if the `UITableView` would create every cell upfront and keep a reference to it - dynamically allocting cells as they are needed is a better approach. Additionally the table view is designed to reuse cells that are no longer visible and to use them to display new content that has become visible - once again for performance reasons. This way a table view can use as little as 20 cells to display thousands of entries in a list.
+The second method `tableView:cellForRowAtIndexPath:` is a little bit more complicated. To save memory a `UITableView` only keeps references to cells that are currently visible. Imagine how a list with 20 000 entries would impact memory and performance if the `UITableView` would create every cell upfront and keep a reference to it - dynamically allocating cells as they are needed is a better approach. Additionally the table view is designed to reuse cells that are no longer visible and to use them to display new content that has become visible - once again for performance reasons. This way a table view can use as little as 20 cells to display thousands of entries in a list.
 
 As developers we need to implement the `tableView:cellForRowAtIndexPath:` method in a way that reuses existing table view cells instead of constantly creating new ones. This is what we accomplish with the first line, we tell the table view to dequeue a cell with a certain *identifier*. The table view will try to reuse an existing cell that is currently not displayed, if that is not possible if will create a new one. We need this identifier because a table view could contain cells of different types (some cells could display places, other music, etc.) and we can only reuse an existing cell if it has the same type as the entry the table view is about to add.
 
@@ -150,7 +150,7 @@ Now it's time to test the App again. Run it and you should see a list with 10 En
 
 #Connect the Detail View Controller
 
-Next, we want to connect the detail view controller with the list view controller, to complete our app navigation. Storyboard allows us to create these connections visually, they are called *segues*. We want to switch to the Detail View Controller when one of the cells in our list is tapped. Select the table view cell to set up a segue. Then select the rightmost tab in the right panel (Connections Inspector). In the *Triggered Segues* section you can see two different ways how a cell can trigger a transition to a different view controller, upon selection and upon accessory action. We want to transition upon selection, which allows the user to tap anywhere into the cell. We can create the segue by draggin the mouse from the dot behind the triggered segue to the target view controller:
+Next, we want to connect the detail view controller with the list view controller, to complete our app navigation. Storyboard allows us to create these connections visually, they are called *segues*. We want to switch to the Detail View Controller when one of the cells in our list is tapped. Select the table view cell to set up a segue. Then select the rightmost tab in the right panel (Connections Inspector). In the *Triggered Segues* section you can see two different ways how a cell can trigger a transition to a different view controller, upon selection and upon accessory action. We want to transition upon selection, which allows the user to tap anywhere into the cell. We can create the segue by drag gin the mouse from the dot behind the triggered segue to the target view controller:
 
 ![image](instructionImages/Segue1.png)
 
@@ -164,3 +164,29 @@ Our detail view controller will need some content. For this app we'll keep it si
 
 When you run this app you will see that the layout doesn't look that nice. Why? Starting with Xcode 6 we are strongly discouraged from defining User Interfaces with absolute positions, that is why interface builder is giving us a preview of our app in square dimensions. However the iPhone 6 is not square and the positions we have set up just don't work on an actual phone. What is the solution? Auto Layout!
 Instead of using absolute positions, Auto Layout let's us define a set of constraints for our views. These constraints allow iOS to calculate absolute positions for different device types. Auto Layout is a whole chapter of its own, so we encourage you to take a look at the [Apple Auto Layout Guide](https://developer.apple.com/library/ios/documentation/UserExperience/Conceptual/AutolayoutPG/Introduction/Introduction.html). For now we will primarily take a look at how we can create Layout Constraints by creating a simple layout for our detail view.
+
+There are two easy ways to create constraints. First select any view from your storyboard. Then either select the *Pin* button in the right corner of the bottom bar, or hold the *Ctrl* key while dragging to another view. Layout constraints always express a relationship between two different layout elements by *Ctrl*-dragging you can easily choose between which views you want to establish a constraint. The *Pin* button in the bottom bar lets you create multiple constraints at once, but always automatically picks the closest neighbor to establish the constraint with: 
+
+![image](instructionImages/CreateConstraints.png)
+
+For our purposes the *Pin* button works better, since we only need to set up constraints between neighbors.
+Select the textfield and create three constraints. You can see that Interface Builder automatically suggests to create constraints with values based on the current position of the view, so you only need to activate the constraints by clicking onto them:
+
+![image](instructionImages/textfieldConstraints.png)
+
+When you've set this up, select *Add 3 Constraints* at the bottom of the view.
+
+These constraints define that we want the text field to have a constant distance to the top of the superview and a constant distance to the left and right margins of the superview. This mean if the parent view resizes this textfield will grow/shrink accordingly.
+
+We want similar settings for our text view. Select the text view and add the following constraints:
+
+![image](instructionImages/textviewConstraints.png)
+
+For the text view we need an additional constraint to define the distance between its top border and the bottom border of the text field.
+
+These constraints are sufficient for our app, they allow iOS to calculate the positions of our views based on the screen size. Time to run the app and see that the positioning looks good now. 
+You can also test the layout in landscape mode and you will see that it looks good!
+
+![image](instructionImages/ConstraintsDone.png)
+
+That is the power of Auto Layout.
