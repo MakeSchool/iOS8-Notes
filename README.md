@@ -223,13 +223,13 @@ Then implement `initWithCoder`, which is the designated initializer for view con
 	        note3.title = @"Note 3";
 	        note3.content = @"Note 3 Content";
 	        
-	        self.notes = [@[note1, note2, note3] mutableCopy];
+	        _notes = [@[note1, note2, note3] mutableCopy];
 	    }
 	    
 	    return self;
 	}
-	
-Now we have some real notes in our application! We can now change the implementation of our table view data source to use these notes instead of placeholder values. First change the implementation of `tableView:numberOfRowsInSection`:
+
+You might have realized that I am accessing the instance variable of notes to initialize the value (`_notes`) instead of the property. This is generally the preferred way inside of initializers in Objective-C as it avoids side effects that may be caused by getters/setters in this class or future subclasses. Now we have some real notes in our application! We can now change the implementation of our table view data source to use these notes instead of placeholder values. First change the implementation of `tableView:numberOfRowsInSection`:
 
 	- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 	    // Return the number of rows in the section.
@@ -389,4 +389,18 @@ On a *Show Note* segue we are performing our old code, on a *Add Note* segue we 
 
 Now that a user can create notes we no longer need to create dummy ones. Replace the initialization of the notes array inside of the initializer with this line:
 
-	self.notes = [NSMutableArray array];
+	_notes = [NSMutableArray array];
+	
+#Deleting Notes
+
+The ability to delete notes is nearly as important as the one to add them. This will also be the last feature that we are adding to this app. Implementing a deletion mechanism is simple. The default delete gesture on iOS is swiping to the left on a table view cell. This can be implemented in our own apps by adding the `tableView:commitEditingStyle:forRowAtIndexPath` method that is part of the `UITableViewDataSource` protocol.
+
+The method gets called when the user attempts to delete an entry with the before mentioned gesture. It is the developers task to delete the according element from the data model and also trigger a visual deletion of the table view cell. Here is the two-liner implementation that does the deletion magic:
+
+	- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+	    [self.notes removeObjectAtIndex:indexPath.row];
+	    [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+	}
+	
+The first line simply deletes the note from our notes array, now our data model is up to date. The second line updates the UI to reflect the deletion. The table view provides a convenience method to do that: `deleteRowsAtIndexPaths:withRowAnimation:`.
+Now you should be able to add, edit and delete notes! Well done.
