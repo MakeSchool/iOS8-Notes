@@ -281,7 +281,7 @@ Now how can we hand the note to this detail view controller? Luckily UIKit provi
 
 We can implement that method in the `NotesListTableViewController` so that we can get access to the `NoteDetailViewController` we are transitioning to.
 
-Add this implementation to *NoteDetailViewController.m*:
+Add this implementation to *NotesListTableViewController.m*:
 
 	- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
 	    NoteDetailViewController *noteDetailViewController = [segue destinationViewController];
