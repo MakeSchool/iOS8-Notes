@@ -351,7 +351,7 @@ Time to run the app once again. You should see notes updating and persisting in 
 
 One of the main changes we need to make to complete this app is letting the user to create and delete notes. At the moment we are creating three notes in code and the user can only edit these.
 
-First we need to add a button that allows the suer to create a new note. Let's add a *+* button to the list view controller. A common place for buttons within view controllers that are wrapped into a navigation controller is the navigation bar at the top of the screen. This is also where the back button is placed automatically.
+First we need to add a button that allows the user to create a new note. Let's add a *+* button to the list view controller. A common place for buttons within view controllers that are wrapped into a navigation controller is the navigation bar at the top of the screen. This is also where the back button is placed automatically.
 
 Buttons for that top bar are called Bar Button Items. Luckily UIKit already provides a *+* button style for us. Add a bar button item to the navigation bar and change the style to be a *+* button:
  
