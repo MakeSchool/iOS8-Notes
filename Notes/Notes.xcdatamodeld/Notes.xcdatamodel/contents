@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6244" systemVersion="14A389" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Note" representedClassName="Note" parentEntity="SyncableObject" syncable="YES">
+        <attribute name="content" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="SyncableObject" isAbstract="YES" syncable="YES">
+        <attribute name="databaseID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="dateUpdated" optional="YES" attributeType="Date" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Note" positionX="-54" positionY="0" width="128" height="75"/>
+        <element name="SyncableObject" positionX="-63" positionY="-18" width="128" height="75"/>
+    </elements>
+</model>

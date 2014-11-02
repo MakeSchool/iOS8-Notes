@@ -9,6 +9,7 @@
 #import "NotesListTableViewController.h"
 #import "Note.h"
 #import "NoteDetailViewController.h"
+#import "AppDelegate.h"
 
 @interface NotesListTableViewController ()
 
@@ -63,11 +64,30 @@
         NSIndexPath *selectedIndexPath = self.tableView.indexPathForSelectedRow;
         noteDetailViewController.note = self.notes[selectedIndexPath.row];
     } else if ([segue.identifier isEqualToString:@"AddNote"]) {
-        Note *note = [Note new];
+        Note* note = [self createNewNote];
         [self.notes addObject:note];
         NoteDetailViewController *noteDetailViewController = [segue destinationViewController];
         noteDetailViewController.note = note;
     }
+}
+
+#pragma mark - Core Data
+
+- (Note*)createNewNote {
+    AppDelegate* appDelegate = [UIApplication sharedApplication].delegate;
+    NSManagedObjectContext* coreDataContext = appDelegate.managedObjectContext;
+    Note* newNote = (Note*) [NSEntityDescription insertNewObjectForEntityForName:@"Note" inManagedObjectContext:coreDataContext];
+    
+    NSError* error = nil;
+    
+    [coreDataContext save:&error];
+    
+    if (error) {
+        // Oh boy, it's all gone wrong.
+    }
+    
+    return newNote;
+    
 }
 
 

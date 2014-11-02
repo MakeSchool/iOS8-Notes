@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		62B48B0519C21D700059BE20 /* Note.m in Sources */ = {isa = PBXBuildFile; fileRef = 62B48B0419C21D700059BE20 /* Note.m */; };
 		62B48B0819C2335B0059BE20 /* NoteDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 62B48B0719C2335B0059BE20 /* NoteDetailViewController.m */; };
 		62DD9D0F19C106A600AC46FA /* NotesListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 62DD9D0E19C106A600AC46FA /* NotesListTableViewController.m */; };
 		62FDBBE219C0CEB20088719B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 62FDBBE119C0CEB20088719B /* main.m */; };
@@ -16,6 +15,8 @@
 		62FDBBED19C0CEB20088719B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 62FDBBEC19C0CEB20088719B /* Images.xcassets */; };
 		62FDBBF019C0CEB20088719B /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 62FDBBEE19C0CEB20088719B /* LaunchScreen.xib */; };
 		62FDBBFC19C0CEB20088719B /* NotesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 62FDBBFB19C0CEB20088719B /* NotesTests.m */; };
+		65B491E919F82A1A0077A119 /* Notes.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 65B491E719F82A1A0077A119 /* Notes.xcdatamodeld */; };
+		65B491EE19F82C0C0077A119 /* Note.m in Sources */ = {isa = PBXBuildFile; fileRef = 65B491ED19F82C0C0077A119 /* Note.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,8 +30,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		62B48B0319C21D700059BE20 /* Note.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Note.h; sourceTree = "<group>"; };
-		62B48B0419C21D700059BE20 /* Note.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Note.m; sourceTree = "<group>"; };
 		62B48B0619C2335B0059BE20 /* NoteDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoteDetailViewController.h; sourceTree = "<group>"; };
 		62B48B0719C2335B0059BE20 /* NoteDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoteDetailViewController.m; sourceTree = "<group>"; };
 		62DD9D0D19C106A600AC46FA /* NotesListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotesListTableViewController.h; sourceTree = "<group>"; };
@@ -46,6 +45,9 @@
 		62FDBBF519C0CEB20088719B /* NotesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NotesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		62FDBBFA19C0CEB20088719B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		62FDBBFB19C0CEB20088719B /* NotesTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NotesTests.m; sourceTree = "<group>"; };
+		65B491E819F82A1A0077A119 /* Notes.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Notes.xcdatamodel; sourceTree = "<group>"; };
+		65B491EC19F82C0C0077A119 /* Note.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Note.h; sourceTree = "<group>"; };
+		65B491ED19F82C0C0077A119 /* Note.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Note.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,16 +91,9 @@
 			children = (
 				62FDBBE319C0CEB20088719B /* AppDelegate.h */,
 				62FDBBE419C0CEB20088719B /* AppDelegate.m */,
-				62FDBBE919C0CEB20088719B /* Main.storyboard */,
-				62DD9D0D19C106A600AC46FA /* NotesListTableViewController.h */,
-				62DD9D0E19C106A600AC46FA /* NotesListTableViewController.m */,
-				62B48B0619C2335B0059BE20 /* NoteDetailViewController.h */,
-				62B48B0719C2335B0059BE20 /* NoteDetailViewController.m */,
-				62FDBBEC19C0CEB20088719B /* Images.xcassets */,
-				62FDBBEE19C0CEB20088719B /* LaunchScreen.xib */,
+				65B491EB19F82A250077A119 /* Core Data */,
+				65B491EA19F82A210077A119 /* UI */,
 				62FDBBDF19C0CEB20088719B /* Supporting Files */,
-				62B48B0319C21D700059BE20 /* Note.h */,
-				62B48B0419C21D700059BE20 /* Note.m */,
 			);
 			path = Notes;
 			sourceTree = "<group>";
@@ -127,6 +122,30 @@
 				62FDBBFA19C0CEB20088719B /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		65B491EA19F82A210077A119 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				62FDBBE919C0CEB20088719B /* Main.storyboard */,
+				62FDBBEE19C0CEB20088719B /* LaunchScreen.xib */,
+				62FDBBEC19C0CEB20088719B /* Images.xcassets */,
+				62DD9D0D19C106A600AC46FA /* NotesListTableViewController.h */,
+				62DD9D0E19C106A600AC46FA /* NotesListTableViewController.m */,
+				62B48B0619C2335B0059BE20 /* NoteDetailViewController.h */,
+				62B48B0719C2335B0059BE20 /* NoteDetailViewController.m */,
+			);
+			name = UI;
+			sourceTree = "<group>";
+		};
+		65B491EB19F82A250077A119 /* Core Data */ = {
+			isa = PBXGroup;
+			children = (
+				65B491E719F82A1A0077A119 /* Notes.xcdatamodeld */,
+				65B491EC19F82C0C0077A119 /* Note.h */,
+				65B491ED19F82C0C0077A119 /* Note.m */,
+			);
+			name = "Core Data";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -235,10 +254,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				62FDBBE519C0CEB20088719B /* AppDelegate.m in Sources */,
+				65B491E919F82A1A0077A119 /* Notes.xcdatamodeld in Sources */,
 				62B48B0819C2335B0059BE20 /* NoteDetailViewController.m in Sources */,
+				65B491EE19F82C0C0077A119 /* Note.m in Sources */,
 				62FDBBE219C0CEB20088719B /* main.m in Sources */,
 				62DD9D0F19C106A600AC46FA /* NotesListTableViewController.m in Sources */,
-				62B48B0519C21D700059BE20 /* Note.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -443,6 +463,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		65B491E719F82A1A0077A119 /* Notes.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				65B491E819F82A1A0077A119 /* Notes.xcdatamodel */,
+			);
+			currentVersion = 65B491E819F82A1A0077A119 /* Notes.xcdatamodel */;
+			path = Notes.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 62FDBBD419C0CEB20088719B /* Project object */;
 }

@@ -18,14 +18,16 @@
 
 @implementation NoteDetailViewController
 
-- (void)viewWillAppear:(BOOL)animated {
+- (void)viewWillAppear:(BOOL)animated
+{
     [super viewWillAppear:animated];
     
     self.titleTextField.text = self.note.title;
     self.contentTextView.text = self.note.content;
 }
 
-- (void)viewWillDisappear:(BOOL)animated {
+- (void)viewWillDisappear:(BOOL)animated
+{
     [super viewWillDisappear:animated];
     
     self.note.title = self.titleTextField.text;
