@@ -9,7 +9,7 @@
 #import "NotesListTableViewController.h"
 #import "Note.h"
 #import "NoteDetailViewController.h"
-#import "AppDelegate.h"
+#import "CoreDataManager.h"
 
 @interface NotesListTableViewController ()
 
@@ -32,6 +32,8 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
+    _notes = [[[CoreDataManager sharedManager] fetchNotes] mutableCopy];
+    
     [self.tableView reloadData];
 }
 
@@ -45,14 +47,15 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"NotesCell" forIndexPath:indexPath];
-    
     cell.textLabel.text = [self.notes[indexPath.row] title];
     
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    Note* noteToBeDeleted = [self.notes objectAtIndex:indexPath.row];
     [self.notes removeObjectAtIndex:indexPath.row];
+    [[CoreDataManager sharedManager] deleteNote:noteToBeDeleted];
     [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
@@ -64,30 +67,11 @@
         NSIndexPath *selectedIndexPath = self.tableView.indexPathForSelectedRow;
         noteDetailViewController.note = self.notes[selectedIndexPath.row];
     } else if ([segue.identifier isEqualToString:@"AddNote"]) {
-        Note* note = [self createNewNote];
+        Note* note = [[CoreDataManager sharedManager] createNewNote];
         [self.notes addObject:note];
         NoteDetailViewController *noteDetailViewController = [segue destinationViewController];
         noteDetailViewController.note = note;
     }
-}
-
-#pragma mark - Core Data
-
-- (Note*)createNewNote {
-    AppDelegate* appDelegate = [UIApplication sharedApplication].delegate;
-    NSManagedObjectContext* coreDataContext = appDelegate.managedObjectContext;
-    Note* newNote = (Note*) [NSEntityDescription insertNewObjectForEntityForName:@"Note" inManagedObjectContext:coreDataContext];
-    
-    NSError* error = nil;
-    
-    [coreDataContext save:&error];
-    
-    if (error) {
-        // Oh boy, it's all gone wrong.
-    }
-    
-    return newNote;
-    
 }
 
 
