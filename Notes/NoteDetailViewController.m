@@ -27,8 +27,6 @@
     [super viewDidLoad];
     
     self.contentTextView.delegate = self;
-    
-    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -49,7 +47,10 @@
     [super viewWillDisappear:animated];
     
     self.note.title = self.titleTextField.text;
-    self.note.content = self.contentTextView.text;
+    
+    if (!textViewPlaceholderTextPresent) {
+        self.note.content = self.contentTextView.text;
+    }
 }
 
 #pragma mark - TextViewDelegate
@@ -57,6 +58,7 @@
 - (void)textViewDidBeginEditing:(UITextView *)textView {
     if (textViewPlaceholderTextPresent) {
         self.contentTextView.text = @"";
+        textViewPlaceholderTextPresent = NO;
     }
 }
 
