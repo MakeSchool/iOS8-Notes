@@ -16,6 +16,7 @@
 		62FDBBED19C0CEB20088719B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 62FDBBEC19C0CEB20088719B /* Images.xcassets */; };
 		62FDBBF019C0CEB20088719B /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 62FDBBEE19C0CEB20088719B /* LaunchScreen.xib */; };
 		62FDBBFC19C0CEB20088719B /* NotesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 62FDBBFB19C0CEB20088719B /* NotesTests.m */; };
+		6586BE5B1A12C17600A4C951 /* NotesListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6586BE5A1A12C17600A4C951 /* NotesListTableViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +47,8 @@
 		62FDBBF519C0CEB20088719B /* NotesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NotesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		62FDBBFA19C0CEB20088719B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		62FDBBFB19C0CEB20088719B /* NotesTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NotesTests.m; sourceTree = "<group>"; };
+		6586BE591A12C17600A4C951 /* NotesListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotesListTableViewCell.h; sourceTree = "<group>"; };
+		6586BE5A1A12C17600A4C951 /* NotesListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotesListTableViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +95,8 @@
 				62FDBBE919C0CEB20088719B /* Main.storyboard */,
 				62DD9D0D19C106A600AC46FA /* NotesListTableViewController.h */,
 				62DD9D0E19C106A600AC46FA /* NotesListTableViewController.m */,
+				6586BE591A12C17600A4C951 /* NotesListTableViewCell.h */,
+				6586BE5A1A12C17600A4C951 /* NotesListTableViewCell.m */,
 				62B48B0619C2335B0059BE20 /* NoteDetailViewController.h */,
 				62B48B0719C2335B0059BE20 /* NoteDetailViewController.m */,
 				62FDBBEC19C0CEB20088719B /* Images.xcassets */,
@@ -235,6 +240,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				62FDBBE519C0CEB20088719B /* AppDelegate.m in Sources */,
+				6586BE5B1A12C17600A4C951 /* NotesListTableViewCell.m in Sources */,
 				62B48B0819C2335B0059BE20 /* NoteDetailViewController.m in Sources */,
 				62FDBBE219C0CEB20088719B /* main.m in Sources */,
 				62DD9D0F19C106A600AC46FA /* NotesListTableViewController.m in Sources */,

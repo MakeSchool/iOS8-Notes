@@ -9,6 +9,7 @@
 #import "NotesListTableViewController.h"
 #import "Note.h"
 #import "NoteDetailViewController.h"
+#import "NotesListTableViewCell.h"
 
 @interface NotesListTableViewController ()
 
@@ -28,6 +29,12 @@
     return self;
 }
 
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+}
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
@@ -43,9 +50,10 @@
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"NotesCell" forIndexPath:indexPath];
+    NotesListTableViewCell *cell = (NotesListTableViewCell*) [tableView dequeueReusableCellWithIdentifier:@"NotesCell" forIndexPath:indexPath];
     
-    cell.textLabel.text = [self.notes[indexPath.row] title];
+    cell.lblTitle.text = [self.notes[indexPath.row] title];
+    cell.lblNotePreview.text = [self.notes[indexPath.row] content];
     
     return cell;
 }

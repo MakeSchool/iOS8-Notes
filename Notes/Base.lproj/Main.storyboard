@@ -1,25 +1,51 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="j9X-1f-A52">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="j9X-1f-A52">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Notes List Table View Controller-->
+        <!--Pretty Notes-->
         <scene sceneID="vL0-8n-UKn">
             <objects>
                 <tableViewController id="daT-zf-oxT" customClass="NotesListTableViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="g2N-s6-kuN">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="88" sectionHeaderHeight="22" sectionFooterHeight="22" id="g2N-s6-kuN">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="sectionIndexBackgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="NotesCell" id="7Nc-tG-iMV">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="NotesCell" id="7Nc-tG-iMV" customClass="NotesListTableViewCell">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7Nc-tG-iMV" id="ztw-ze-QXu">
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="74" translatesAutoresizingMaskIntoConstraints="NO" id="H75-kd-ahE" userLabel="TitleLabel">
+                                            <rect key="frame" x="18" y="13" width="564" height="19.5"/>
+                                            <fontDescription key="fontDescription" name="Georgia-Bold" family="Georgia" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pqa-du-1W3" userLabel="PreviewLabel">
+                                            <rect key="frame" x="18" y="37" width="564" height="37"/>
+                                            <fontDescription key="fontDescription" name="Georgia-Italic" family="Georgia" pointSize="16"/>
+                                            <color key="textColor" red="0.2274509804" green="0.18039215689999999" blue="0.2470588235" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="pqa-du-1W3" firstAttribute="leading" secondItem="ztw-ze-QXu" secondAttribute="leadingMargin" constant="10" id="XZ7-Gk-tRY"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="pqa-du-1W3" secondAttribute="trailing" constant="10" id="apQ-1h-5g8"/>
+                                        <constraint firstItem="pqa-du-1W3" firstAttribute="top" secondItem="H75-kd-ahE" secondAttribute="bottom" constant="5" id="ezb-Rn-zHL"/>
+                                        <constraint firstItem="H75-kd-ahE" firstAttribute="leading" secondItem="ztw-ze-QXu" secondAttribute="leadingMargin" constant="10" id="k6t-ud-TtX"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="pqa-du-1W3" secondAttribute="bottom" constant="5" id="kX9-Xd-Vqh"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="H75-kd-ahE" secondAttribute="trailing" constant="10" id="z6c-L0-XWz"/>
+                                        <constraint firstItem="H75-kd-ahE" firstAttribute="top" secondItem="ztw-ze-QXu" secondAttribute="topMargin" constant="5" id="znd-Tf-K5q"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="lblNotePreview" destination="pqa-du-1W3" id="6qr-z5-ryZ"/>
+                                    <outlet property="lblTitle" destination="H75-kd-ahE" id="N4i-ZX-foO"/>
                                     <segue destination="0gn-G8-c3P" kind="show" identifier="ShowNote" id="TjE-wK-Cmu"/>
                                 </connections>
                             </tableViewCell>
@@ -30,8 +56,9 @@
                         </connections>
                     </tableView>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" id="Rim-S3-Yg1">
+                    <navigationItem key="navigationItem" title="Pretty Notes" id="Rim-S3-Yg1">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="HNM-BE-1Pg">
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <segue destination="0gn-G8-c3P" kind="show" identifier="AddNote" id="f59-Sx-gD6"/>
                             </connections>
@@ -55,28 +82,30 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OPh-Zh-BPz">
-                                <rect key="frame" x="16" y="81" width="568" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ICw-2g-KLH">
-                                <rect key="frame" x="16" y="119" width="568" height="473"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Type some stuff here!" translatesAutoresizingMaskIntoConstraints="NO" id="ICw-2g-KLH">
+                                <rect key="frame" x="16" y="104" width="568" height="416"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" name="Georgia" family="Georgia" pointSize="20"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Title" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OPh-Zh-BPz">
+                                <rect key="frame" x="16" y="74" width="568" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="20s-GW-UWr"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Georgia-Bold" family="Georgia" pointSize="20"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="OPh-Zh-BPz" firstAttribute="top" secondItem="EKK-vK-RwW" secondAttribute="bottom" constant="17" id="DPu-Qe-7bD"/>
+                            <constraint firstItem="OPh-Zh-BPz" firstAttribute="top" secondItem="EKK-vK-RwW" secondAttribute="bottom" constant="10" id="DPu-Qe-7bD"/>
                             <constraint firstItem="OPh-Zh-BPz" firstAttribute="leading" secondItem="Hsi-Y0-UjQ" secondAttribute="leadingMargin" id="N8E-0P-PPJ"/>
                             <constraint firstItem="OPh-Zh-BPz" firstAttribute="trailing" secondItem="Hsi-Y0-UjQ" secondAttribute="trailingMargin" id="NXV-KV-Jen"/>
-                            <constraint firstItem="nqG-ua-hqA" firstAttribute="top" secondItem="ICw-2g-KLH" secondAttribute="bottom" constant="8" id="OJr-Wc-3xx"/>
+                            <constraint firstItem="nqG-ua-hqA" firstAttribute="top" secondItem="ICw-2g-KLH" secondAttribute="bottom" constant="36" id="OJr-Wc-3xx"/>
                             <constraint firstItem="ICw-2g-KLH" firstAttribute="leading" secondItem="Hsi-Y0-UjQ" secondAttribute="leadingMargin" id="mUy-Eb-VFL"/>
                             <constraint firstItem="ICw-2g-KLH" firstAttribute="trailing" secondItem="Hsi-Y0-UjQ" secondAttribute="trailingMargin" id="x6E-v9-d7H"/>
-                            <constraint firstItem="ICw-2g-KLH" firstAttribute="top" secondItem="OPh-Zh-BPz" secondAttribute="bottom" constant="8" id="zxa-LB-UiX"/>
+                            <constraint firstItem="ICw-2g-KLH" firstAttribute="top" secondItem="OPh-Zh-BPz" secondAttribute="bottom" id="zxa-LB-UiX"/>
                         </constraints>
                     </view>
                     <connections>
@@ -93,9 +122,15 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="j9X-1f-A52" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Fgg-Ll-Tqp">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="Fgg-Ll-Tqp">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="barTintColor" red="1" green="0.81568627450980391" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>

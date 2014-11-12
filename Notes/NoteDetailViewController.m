@@ -17,12 +17,32 @@
 @end
 
 @implementation NoteDetailViewController
+{
+    BOOL textViewPlaceholderTextPresent;
+}
+
+#pragma mark - Lifecycle
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    self.contentTextView.delegate = self;
+    
+    
+}
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
     self.titleTextField.text = self.note.title;
-    self.contentTextView.text = self.note.content;
+    
+    if (!self.note.content) {
+        self.contentTextView.text = @"Type your note here!";
+        textViewPlaceholderTextPresent = YES;
+    } else {
+        self.contentTextView.text = self.note.content;
+        textViewPlaceholderTextPresent = NO;
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -30,6 +50,14 @@
     
     self.note.title = self.titleTextField.text;
     self.note.content = self.contentTextView.text;
+}
+
+#pragma mark - TextViewDelegate
+
+- (void)textViewDidBeginEditing:(UITextView *)textView {
+    if (textViewPlaceholderTextPresent) {
+        self.contentTextView.text = @"";
+    }
 }
 
 @end

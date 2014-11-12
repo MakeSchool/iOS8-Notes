@@ -10,7 +10,7 @@
 
 @class Note;
 
-@interface NoteDetailViewController : UIViewController
+@interface NoteDetailViewController : UIViewController <UITextViewDelegate>
 
 @property (nonatomic, strong) Note *note;
 
