@@ -113,7 +113,7 @@ Now lets fill the table view with some placeholder content:
 		}
 		
 The `tableView:numberOfRowsInSection:` implementation is quickly explained, the table view wants to 
-now the amount of rows - for now we return 10 as a placeholder, later we will return the amount of notes we have stored in the App.
+know the amount of rows - for now we return 10 as a placeholder, later we will return the amount of notes we have stored in the App.
 
 The second method `tableView:cellForRowAtIndexPath:` is a little bit more complicated. To save memory a `UITableView` only keeps references to cells that are currently visible. Imagine how a list with 20 000 entries would impact memory and performance if the `UITableView` would create every cell upfront and keep a reference to it - dynamically allocating cells as they are needed is a better approach. Additionally the table view is designed to reuse cells that are no longer visible and to use them to display new content that has become visible - once again for performance reasons. This way a table view can use as little as 20 cells to display thousands of entries in a list.
 
@@ -134,7 +134,7 @@ For this step open *Main.storyboard*. Interface Builder allows us to design diff
 
 ![image](instructionImages/CellIdentifier.png)
 
-Now that the identifier we have set in code matches the one we have set up in our storyboard, the table view will now which type of cell it needs to instantiate.
+Now that the identifier we have set in code matches the one we have set up in our storyboard, the table view will know which type of cell it needs to instantiate.
 
 ##Setting up a Custom Class
 
@@ -369,15 +369,15 @@ Thinking about this you might realize that we now have two different segues that
 
 ![image](instructionImages/nameSegue.png)
 
-Choose "AddNote" as the identifier for the segue from the *+* button and "ShowNote" for the segue from the table view cell.
+Choose "addNote" as the identifier for the segue from the *+* button and "showNote" for the segue from the table view cell.
 Now we can identify the two different segues. Let's change the implementation of our `prepareForSegue:` method accordingly:
 
 	- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-	    if ([segue.identifier isEqualToString:@"ShowNote"]) {
+	    if ([segue.identifier isEqualToString:@"showNote"]) {
 	        NoteDetailViewController *noteDetailViewController = [segue destinationViewController];
 	        NSIndexPath *selectedIndexPath = self.tableView.indexPathForSelectedRow;
 	        noteDetailViewController.note = self.notes[selectedIndexPath.row];
-	    } else if ([segue.identifier isEqualToString:@"AddNote"]) {
+	    } else if ([segue.identifier isEqualToString:@"addNote"]) {
 	        Note *note = [Note new];
 	        [self.notes addObject:note];
 	        NoteDetailViewController *noteDetailViewController = [segue destinationViewController];
